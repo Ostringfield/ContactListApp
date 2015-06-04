@@ -13,6 +13,9 @@
 		0E85785C1B1F1C420075B20E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E85785B1B1F1C420075B20E /* Images.xcassets */; };
 		0E85785F1B1F1C420075B20E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E85785D1B1F1C420075B20E /* LaunchScreen.xib */; };
 		0E85786B1B1F1C420075B20E /* ContactListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85786A1B1F1C420075B20E /* ContactListTests.swift */; };
+		0E8578751B1F1D140075B20E /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578741B1F1D140075B20E /* Contact.swift */; };
+		0E8578781B1F35CB0075B20E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578771B1F35CB0075B20E /* DataModel.swift */; };
+		0E8578801B2044B80075B20E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85787F1B2044B80075B20E /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		0E8578641B1F1C420075B20E /* ContactListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8578691B1F1C420075B20E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E85786A1B1F1C420075B20E /* ContactListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTests.swift; sourceTree = "<group>"; };
+		0E8578741B1F1D140075B20E /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		0E8578771B1F35CB0075B20E /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		0E85787F1B2044B80075B20E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +88,10 @@
 				0E8578581B1F1C420075B20E /* Main.storyboard */,
 				0E85785B1B1F1C420075B20E /* Images.xcassets */,
 				0E85785D1B1F1C420075B20E /* LaunchScreen.xib */,
+				0E85787F1B2044B80075B20E /* SwiftyJSON.swift */,
 				0E8578521B1F1C420075B20E /* Supporting Files */,
+				0E8578741B1F1D140075B20E /* Contact.swift */,
+				0E8578771B1F35CB0075B20E /* DataModel.swift */,
 			);
 			path = ContactList;
 			sourceTree = "<group>";
@@ -212,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E8578751B1F1D140075B20E /* Contact.swift in Sources */,
+				0E8578781B1F35CB0075B20E /* DataModel.swift in Sources */,
 				0E8578571B1F1C420075B20E /* ViewController.swift in Sources */,
+				0E8578801B2044B80075B20E /* SwiftyJSON.swift in Sources */,
 				0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +355,7 @@
 				INFOPLIST_FILE = ContactList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -353,6 +366,7 @@
 				INFOPLIST_FILE = ContactList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -409,6 +423,7 @@
 				0E8578701B1F1C420075B20E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0E8578711B1F1C420075B20E /* Build configuration list for PBXNativeTarget "ContactListTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +432,7 @@
 				0E8578731B1F1C420075B20E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
