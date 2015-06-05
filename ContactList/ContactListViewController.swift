@@ -61,7 +61,8 @@ class ContactListViewController: UITableViewController {
     
     //Animation for deselecting the row after a user taps it.
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("ShowContact", sender: nil)
+        //tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }
