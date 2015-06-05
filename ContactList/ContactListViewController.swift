@@ -59,9 +59,19 @@ class ContactListViewController: UITableViewController {
         return cell
     }
     
+    //called before the segue is performed
+    //Gives the Contact details to the destination controller (ContactInfoViewController) 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowContact" {
+            let controller = segue.destinationViewController as! ContactInfoViewController
+            controller.contact = sender as! Contact
+        }
+    }
+    
     //Animation for deselecting the row after a user taps it.
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ShowContact", sender: nil)
+        let contact = dataModel.contactList[indexPath.row]
+        performSegueWithIdentifier("ShowContact", sender: contact)
         //tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 

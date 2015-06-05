@@ -54,7 +54,7 @@ class Contact: NSObject {
             self.suite = suite
             self.city = city
             self.zipcode = zipcode
-            fullAddress = "Address: " + suite + " " + street + " " + city + ", " + zipcode
+            fullAddress = suite + " " + street + "\n" + city + ", " + zipcode
         }
     }
     
@@ -80,7 +80,7 @@ class Contact: NSObject {
             self.bs = bs
         }
         func toString() -> String {
-            return "companyName: \(companyName) \ncatchPhrase: \(catchPhrase) \nbs: \(bs)"
+            return "\(companyName)\n\(catchPhrase) \n\(bs)"
         }
     }
 }
