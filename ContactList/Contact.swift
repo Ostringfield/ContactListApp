@@ -37,6 +37,10 @@ class Contact: NSObject {
             self.phone = phone
             self.website = website
         }
+        func toString() -> String {
+            return "id: \(id) \nname: \(name) \nusername: \(username) \nemail: \(email) \nphone: \(phone) \nwebsite: \(website)"
+        
+        }
     }
     
     class Address {
@@ -45,23 +49,24 @@ class Contact: NSObject {
         var city = ""
         var zipcode = ""
         var fullAddress = ""
-        init() {}
         init(street: String, suite: String, city: String, zipcode: String) {
             self.street = street
             self.suite = suite
             self.city = city
             self.zipcode = zipcode
-            fullAddress = suite + street + city + zipcode
+            fullAddress = "Address: " + suite + " " + street + " " + city + ", " + zipcode
         }
     }
     
     class Geo {
         var geoLat = 0.0
         var geoLng = 0.0
-        init(){}
         init(lat: Double, lng: Double) {
             geoLat = lat
             geoLng = lng
+        }
+        func toString() -> String {
+            return "geoLat: \(geoLat) \ngeoLng: \(geoLng)"
         }
     }
     
@@ -69,11 +74,13 @@ class Contact: NSObject {
         var companyName = ""
         var catchPhrase = ""
         var bs = ""
-        init() {}
         init(companyName: String, catchPhrase: String, bs: String) {
             self.companyName = companyName
             self.catchPhrase = catchPhrase
             self.bs = bs
+        }
+        func toString() -> String {
+            return "companyName: \(companyName) \ncatchPhrase: \(catchPhrase) \nbs: \(bs)"
         }
     }
 }

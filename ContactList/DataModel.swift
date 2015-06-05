@@ -14,13 +14,13 @@ class DataModel  {
     init() {
         getContactJSONData()
         for c in contactList {
-            println(c.person.name)
+            println(c.person.toString() + "\n\(c.address.fullAddress) \n\(c.geo.toString()) \n\(c.company.toString()) \n")
         }
     }
     func getContactJSONData() {
         let urlString = "http://jsonplaceholder.typicode.com/users"
         if let data = NSData(contentsOfURL: NSURL(string: urlString)!) {
-            let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
+            //let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
             let json = JSON(data: data)
             
             for user in json.arrayValue {
@@ -33,11 +33,11 @@ class DataModel  {
                 let zipcode = user["address"]["zipcode"].stringValue
                 let city = user["address"]["city"].stringValue
                 let lat = user["address"]["geo"]["lat"].doubleValue
-                let lng = user["address"]["geo"]["lat"].doubleValue
+                let lng = user["address"]["geo"]["lng"].doubleValue
                 let phone = user["phone"].stringValue
                 let website = user["website"].stringValue
                 let companyName = user["company"]["name"].stringValue
-                let catchPhrase = user["company"]["catchphrase"].stringValue
+                let catchPhrase = user["company"]["catchPhrase"].stringValue
                 let bs = user["company"]["bs"].stringValue
                 let contact = Contact(id: id, name: name, username: username, email: email, phone: phone, website: website, street: street, suite: suite, city: city, zipcode: zipcode, lat: lat, lng: lng, companyName: companyName, catchPhrase: catchPhrase, bs: bs)
                 contactList.append(contact)

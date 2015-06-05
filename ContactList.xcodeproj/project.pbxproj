@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578541B1F1C420075B20E /* AppDelegate.swift */; };
-		0E8578571B1F1C420075B20E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578561B1F1C420075B20E /* ViewController.swift */; };
+		0E8578571B1F1C420075B20E /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578561B1F1C420075B20E /* ContactListViewController.swift */; };
 		0E85785A1B1F1C420075B20E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E8578581B1F1C420075B20E /* Main.storyboard */; };
 		0E85785C1B1F1C420075B20E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E85785B1B1F1C420075B20E /* Images.xcassets */; };
 		0E85785F1B1F1C420075B20E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E85785D1B1F1C420075B20E /* LaunchScreen.xib */; };
@@ -32,7 +32,7 @@
 		0E85784F1B1F1C420075B20E /* ContactList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8578531B1F1C420075B20E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E8578541B1F1C420075B20E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E8578561B1F1C420075B20E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0E8578561B1F1C420075B20E /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
 		0E8578591B1F1C420075B20E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E85785B1B1F1C420075B20E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0E85785E1B1F1C420075B20E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8578541B1F1C420075B20E /* AppDelegate.swift */,
-				0E8578561B1F1C420075B20E /* ViewController.swift */,
+				0E8578561B1F1C420075B20E /* ContactListViewController.swift */,
 				0E8578581B1F1C420075B20E /* Main.storyboard */,
 				0E85785B1B1F1C420075B20E /* Images.xcassets */,
 				0E85785D1B1F1C420075B20E /* LaunchScreen.xib */,
@@ -223,7 +223,7 @@
 			files = (
 				0E8578751B1F1D140075B20E /* Contact.swift in Sources */,
 				0E8578781B1F35CB0075B20E /* DataModel.swift in Sources */,
-				0E8578571B1F1C420075B20E /* ViewController.swift in Sources */,
+				0E8578571B1F1C420075B20E /* ContactListViewController.swift in Sources */,
 				0E8578801B2044B80075B20E /* SwiftyJSON.swift in Sources */,
 				0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */,
 			);
