@@ -11,19 +11,18 @@ import Foundation
 
 class DataModel  {
     var contactList = [Contact]()
+
     init() {
-        getContactJSONData()
-        for c in contactList {
-            println(c.person.toString() + "\n\(c.address.fullAddress) \n\(c.geo.toString()) \n\(c.company.toString()) \n")
-        }
+        setContactDataWithJSONURL()
+        sortContacts()
     }
-    func getContactJSONData() {
+    func setContactDataWithJSONURL() {
         let urlString = "http://jsonplaceholder.typicode.com/users"
         if let data = NSData(contentsOfURL: NSURL(string: urlString)!) {
             //let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
             let json = JSON(data: data)
-            
             for user in json.arrayValue {
+                
                 let id = user["id"].intValue
                 let name = user["name"].stringValue
                 let username = user["username"].stringValue
@@ -41,8 +40,15 @@ class DataModel  {
                 let bs = user["company"]["bs"].stringValue
                 let contact = Contact(id: id, name: name, username: username, email: email, phone: phone, website: website, street: street, suite: suite, city: city, zipcode: zipcode, lat: lat, lng: lng, companyName: companyName, catchPhrase: catchPhrase, bs: bs)
                 contactList.append(contact)
+               
             }
         }
     }
+    
+    func sortContacts() {
+        //compares two strings ignore case sensitivity
+     //   contactList.sort({contact1, contact2 in return contact1.person.name.localizedStandardComapre(contact2.person.name) == NSComparisonResult.OrderedAscending})
+    }
+    
 }
 
