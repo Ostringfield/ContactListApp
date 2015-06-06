@@ -11,29 +11,66 @@ import UIKit
 class ContactListViewController: UITableViewController {
 
     var dataModel: DataModel!
+    var actInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    var loadingLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        var actInd = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
-        actInd.center = self.view.center
+        startLoadingAnimation()
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        dispatch_async(queue) {
+    
+            let urlString = "http://jsonplaceholder.typicode.com/users"
+            if let data = NSData(contentsOfURL: NSURL(string: urlString)!) {
+                self.dataModel.setContactData(data)
+            //self.getDataFromServer()
+            dispatch_async(dispatch_get_main_queue()) {
+                self.stopLoadingAnimation()
+                self.tableView.reloadData()
+                }
+                
+            } else {
+                
+            }
+        }
+        println(dataModel.contactList)
+    }
+    func startLoadingAnimation() {
+        actInd.frame = CGRectMake(0, 0, 200, 200)
+        loadingLabel.text = "Loading Contacts"
+        loadingLabel.font = UIFont(name: loadingLabel.font.fontName, size: 20)
+        loadingLabel.sizeToFit()
+        actInd.center = CGPoint(x: self.view.center.x, y: 25)
+        loadingLabel.center = CGPoint(x: actInd.center.x + 10, y: actInd.center.y + 25)
         actInd.hidesWhenStopped = true
-        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        view.addSubview(actInd)
+        self.tableView.separatorStyle = .None
+        self.view.addSubview(actInd)
+        self.view.addSubview(loadingLabel)
         actInd.startAnimating()
-        println("here i am!")
+        loadingLabel.text = "Loading Contacts"
+        //self.view.bringSubviewToFront(actInd)
+    }
+    
+    func stopLoadingAnimation() {
+        actInd.stopAnimating()
+        loadingLabel.removeFromSuperview()
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    }
+    
+    func getDataFromServer() {
+        let urlString = "http://jsonplaceholder.typicode.com/users"
         let session = NSURLSession.sharedSession()
-        let url = NSURL(string: "http:// jsonplaceholder.typicode.com/users")
-        var dataTask = session.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        var dataTask = session.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: {data, response, error -> Void in
             var err: NSError?
+            if err != nil {
+                println(err?.localizedDescription)
+            }
             self.dataModel.setContactData(data)
-            dispatch_async(dispatch_get_main_queue(), {self.tableView.reloadData()})
+        
         })
         dataTask.resume()
-        actInd.stopAnimating()
     }
-
-    func getDataFromServer() {
-        
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
