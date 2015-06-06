@@ -13,7 +13,7 @@ class Contact: NSObject {
     var address: Address
     var geo: Geo
     var company: Company
-    
+
     init(id: Int, name: String, username: String, email: String, phone: String, website: String, street: String, suite: String, city: String, zipcode: String, lat: Double, lng: Double, companyName: String, catchPhrase: String, bs: String) {
         person = Person(id: id, name: name, username: username, email: email, phone: phone, website: website)
         address = Address(street: street, suite: suite, city: city, zipcode: zipcode)
@@ -22,7 +22,7 @@ class Contact: NSObject {
         super.init()
     }
     
-    class Person {
+    struct Person {
         var id: Int?
         var name = ""
         var username = ""
@@ -43,7 +43,7 @@ class Contact: NSObject {
         }
     }
     
-    class Address {
+    struct Address {
         var street = ""
         var suite = ""
         var city = ""
@@ -58,7 +58,7 @@ class Contact: NSObject {
         }
     }
     
-    class Geo {
+    struct Geo {
         var geoLat = 0.0
         var geoLng = 0.0
         init(lat: Double, lng: Double) {
@@ -70,7 +70,7 @@ class Contact: NSObject {
         }
     }
     
-    class Company {
+    struct Company {
         var companyName = ""
         var catchPhrase = ""
         var bs = ""

@@ -11,14 +11,11 @@ import Foundation
 
 class DataModel  {
     var contactList = [Contact]()
-
-    init() {
-        setContactDataWithJSONURL()
-        sortContacts()
-    }
-    func setContactDataWithJSONURL() {
-        let urlString = "http://jsonplaceholder.typicode.com/users"
-        if let data = NSData(contentsOfURL: NSURL(string: urlString)!) {
+    
+    //take the raw NSData JSON data
+    //extract the JSON data using SwiftyJSON
+    //store the contact info into a Contact class then add it to the list.
+    func setContactData(data: NSData) {
             //let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
             let json = JSON(data: data)
             for user in json.arrayValue {
@@ -43,11 +40,11 @@ class DataModel  {
                
             }
         }
-    }
+    
     
     func sortContacts() {
         //compares two strings ignore case sensitivity
-     //   contactList.sort({contact1, contact2 in return contact1.person.name.localizedStandardComapre(contact2.person.name) == NSComparisonResult.OrderedAscending})
+        contactList.sort({contact1, contact2 in return contact1.person.name.localizedStandardCompare(contact2.person.name) == NSComparisonResult.OrderedAscending})
     }
     
 }

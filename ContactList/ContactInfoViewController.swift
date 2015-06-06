@@ -19,12 +19,15 @@ class ContactInfoViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 44.0
+        self.title = contact.person.name
         usernameText.text = contact.person.username
         phoneText.text = contact.person.phone
         addressText.text = contact.address.fullAddress
         websiteText.text = contact.person.website
         companyText.text = contact.company.toString()
-        
+       // addressText.sizeToFit()
+        //companyText.sizeToFit()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,18 +37,7 @@ class ContactInfoViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         
     }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        if indexPath.section == 2 {
-            return 88.0
-        } else if indexPath.section == 4 {
-            return 44.0 * 3
-        } else {
-            return 44.0
-        }
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

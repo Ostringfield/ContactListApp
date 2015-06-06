@@ -16,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let dataModel = DataModel()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        //looks at the window property to find the UIWindow that contains the storyboard
+        let navigationController = window!.rootViewController as! UINavigationController
+        let controller = navigationController.viewControllers[0] as! ContactListViewController
+        //set the dataModel in the ContactListViewController
+        //load the data
+        controller.dataModel = dataModel
+        
         return true
     }
 

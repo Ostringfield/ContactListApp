@@ -10,12 +10,30 @@ import UIKit
 
 class ContactListViewController: UITableViewController {
 
-    var dataModel = DataModel()
+    var dataModel: DataModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        var actInd = UIActivityIndicatorView(frame: CGRectMake(0,0, 50, 50)) as UIActivityIndicatorView
+        actInd.center = self.view.center
+        actInd.hidesWhenStopped = true
+        actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        view.addSubview(actInd)
+        actInd.startAnimating()
+        println("here i am!")
+        let session = NSURLSession.sharedSession()
+        let url = NSURL(string: "http:// jsonplaceholder.typicode.com/users")
+        var dataTask = session.dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+            var err: NSError?
+            self.dataModel.setContactData(data)
+            dispatch_async(dispatch_get_main_queue(), {self.tableView.reloadData()})
+        })
+        dataTask.resume()
+        actInd.stopAnimating()
     }
 
+    func getDataFromServer() {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
