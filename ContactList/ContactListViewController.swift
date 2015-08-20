@@ -5,6 +5,8 @@
 //  Created by Ollie Stringfield on 3/06/15.
 //  Copyright (c) 2015 Ollie Stringfield. All rights reserved.
 //
+// View controller for the Contacts screen containing a list of contacts
+// The contacts are fetched live on start up from "http://jsonplaceholder.typicode.com/users"
 
 import UIKit
 
@@ -13,28 +15,42 @@ class ContactListViewController: UITableViewController {
     var dataModel: DataModel!
     var actInd = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     var loadingLabel = UILabel()
+    var errorMessage = "Error"
     
+    //Sort button outlet
+    @IBOutlet weak var sortButton: UIBarButtonItem!
+    
+    /**
+    sortContactList method
+    
+    Gets called when the sort button is pushed 
+    Sorts the contact list by ascending if ⬆︎ is displayed
+    Otherwise sorts the contact list by descending when ⬇︎ is displayed
+    */
+    @IBAction func sortContactList(sender: AnyObject) {
+        dataModel.sortContacts()
+        if dataModel.ascending { sortButton.title = "Sort ⬇︎" }
+        else { sortButton.title = "Sort ⬆︎"} //first button push
+        tableView.reloadData()
+    }
+    
+    /**
+    viewDidLoad method
+    
+    Loads the data from the server after the view is loaded
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
-        startLoadingAnimation()
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        dispatch_async(queue) {
-    
-            let urlString = "http://jsonplaceholder.typicode.com/users"
-            if let data = NSData(contentsOfURL: NSURL(string: urlString)!) {
-                self.dataModel.setContactData(data)
-            //self.getDataFromServer()
-            dispatch_async(dispatch_get_main_queue()) {
-                self.stopLoadingAnimation()
-                self.tableView.reloadData()
-                }
-                
-            } else {
-                
-            }
-        }
+        getDataFromServer()
         println(dataModel.contactList)
     }
+    
+    /**
+    startLoadingAnimation method
+    
+    Creates a loading animation to display while the data will be
+    loaded from the server.
+    */
     func startLoadingAnimation() {
         actInd.frame = CGRectMake(0, 0, 200, 200)
         loadingLabel.text = "Loading Contacts"
@@ -44,78 +60,117 @@ class ContactListViewController: UITableViewController {
         loadingLabel.center = CGPoint(x: actInd.center.x + 10, y: actInd.center.y + 25)
         actInd.hidesWhenStopped = true
         self.tableView.separatorStyle = .None
-        self.view.addSubview(actInd)
-        self.view.addSubview(loadingLabel)
+        self.view.addSubview(actInd) //add activity indicator
+        self.view.addSubview(loadingLabel) //add "Loading Contacts" label
         actInd.startAnimating()
-        loadingLabel.text = "Loading Contacts"
-        //self.view.bringSubviewToFront(actInd)
     }
     
+    /**
+    stopLoadingAnimation method
+    
+    Called to stop the laoding animation right before the data is 
+    put on the screen.
+    */
     func stopLoadingAnimation() {
         actInd.stopAnimating()
         loadingLabel.removeFromSuperview()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
     }
     
+    /**
+    getDataFromServer method
+    
+    Uses a NSURLSession to fetch live data from the designated url.
+    The JSON data is then stored into the dataModel as a list of Contact classes
+    */
     func getDataFromServer() {
         let urlString = "http://jsonplaceholder.typicode.com/users"
         let session = NSURLSession.sharedSession()
-        var dataTask = session.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: {data, response, error -> Void in
-            var err: NSError?
-            if err != nil {
-                println(err?.localizedDescription)
+        startLoadingAnimation() //start the loading animation
+        //create a new session and set the JSON data to the dataModel
+        var dataTask = session.dataTaskWithURL(NSURL(string: urlString)!,
+            completionHandler: {data, response, error -> Void in
+            if let err = error { //if there is an error
+                self.errorMessage = err.localizedDescription
+                //call the main thread to stop the loading animation
+                //also call showNetworkError to display an error message
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.stopLoadingAnimation()
+                    self.tableView.reloadData()
+                    self.showNetworkError()
+                }
+            //cast the response to a NSHTTPResponse so we can use 
+            //its statusCode property
+            } else if let httpResponse = response as? NSHTTPURLResponse {
+                if httpResponse.statusCode == 200 { //successful response
+                    self.dataModel.setContactData(data) //set the data
+                    dispatch_async(dispatch_get_main_queue()) { //stop the UI
+                        self.stopLoadingAnimation()
+                        self.dataModel.sortContacts()
+                        self.tableView.reloadData()
+                    }
+                }
             }
-            self.dataModel.setContactData(data)
-        
+            
+            
         })
         dataTask.resume()
     }
     
+    /**
+    showNetworkError method
+    
+    Called when there is a network error.
+    Displays an alert action in a alert controller on the screen.
+    The network error is the error returned from the NSUrlSession.
+    */
+    func showNetworkError() {
+        //create an Alert controller which displays a Network error message
+        let alert = UIAlertController(title: "Network Error", message: errorMessage, preferredStyle: .Alert)
+        //create an Alert action
+        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        //present the Alert controller
+        presentViewController(alert, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    //call for each row in the table
-    //return: the number of rows in the contactList
+    /**
+    tableView numberOfRowsInSection method
+    
+    Called for each row in the table
+    return: the number of rows in the contact list
+    */
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataModel.contactList.count - 1
+        return dataModel.contactList.count 
     }
     
-    //creates each cell for each row
-    //return: the cell for the row at indexPath
+    /**
+    tablewView cellForRowAtIndexPath method
+    
+    Creates a prototype cell for each row and sets a Contact to it.
+    return: the cell for the row at indexPath
+    */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //this makes a new cell.
-        // the previous code used a prototype cell with an Identifier
-        // let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as! UITableViewCell
-        let cellIdentifier = "Cell"
-        
-        //type cast optional because dequeueReusableCellWithIdentifier can return a nil if there is no cell
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
-        }
-        //get the contact
-        let contact = dataModel.contactList[indexPath.row]
-        cell.textLabel?.text = contact.person.name //set the label to the Contact's name
-        cell.detailTextLabel?.text = contact.person.email //set the detailTextLabel to the Contact's email
-        /* old cold using prototype cells, didn't work with detailTextLabel.
-        //create a prototype cell (recycles old an old cell if none is available)
+
+        //A new or recycled prototype cell
         let cell = tableView.dequeueReusableCellWithIdentifier("Contact") as! UITableViewCell
         
-        //reference to the cell UILabel with tag: 1000
-        let label = cell.viewWithTag(1000) as! UILabel
-        //set the label to the name of the contact person
-        label.text = d.contactList[indexPath.row].person.name
-        cell.detailTextLabel?.text = d.contactList[indexPath.row].person.email
-        */
-        println("made a cell!")
+        //get the contact and set the cell text
+        let contact = dataModel.contactList[indexPath.row]
+        cell.textLabel?.text = contact.person.name
+        cell.detailTextLabel?.text = contact.person.email
         return cell
     }
     
-    //called before the segue is performed
-    //Gives the Contact details to the destination controller (ContactInfoViewController) 
+    /**
+    prepareForSegue method
+    
+    Called before the segue is executed.
+    Gives the Contact details to the destination ContactInfoViewController
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowContact" {
             let controller = segue.destinationViewController as! ContactInfoViewController
@@ -123,11 +178,15 @@ class ContactListViewController: UITableViewController {
         }
     }
     
-    //Animation for deselecting the row after a user taps it.
+    /**
+    tableview didSelectRowAtIndexPath method
+    
+    Called when the user selects a cell.
+    Perform a segue to the ContactInfoViewController.
+    */
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let contact = dataModel.contactList[indexPath.row]
         performSegueWithIdentifier("ShowContact", sender: contact)
-        //tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }

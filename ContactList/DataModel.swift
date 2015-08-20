@@ -5,16 +5,21 @@
 //  Created by Ollie Stringfield on 4/06/15.
 //  Copyright (c) 2015 Ollie Stringfield. All rights reserved.
 //
+// This file contains the data for all the contacts in the app
 
 import Foundation
 
-
 class DataModel  {
     var contactList = [Contact]()
+    var ascending = false
     
-    //take the raw NSData JSON data
-    //extract the JSON data using SwiftyJSON
-    //store the contact info into a Contact class then add it to the list.
+    /**
+    setContactData
+    
+    data: the JSON data as NSData
+    Converts JSON data and stores it in a list of Contact objects
+    Extracted JSON data using SwiftyJSON (third party)
+    */
     func setContactData(data: NSData) {
             //let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
             let json = JSON(data: data)
@@ -41,10 +46,20 @@ class DataModel  {
             }
         }
     
+    /**
+    sortContacts method
     
+    Sort the contact list by ascending or descending order
+    */
     func sortContacts() {
-        //compares two strings ignore case sensitivity
-        contactList.sort({contact1, contact2 in return contact1.person.name.localizedStandardCompare(contact2.person.name) == NSComparisonResult.OrderedAscending})
+        ascending = !ascending //Set the sort to do next (button push)
+        //change the list to be in ascending order
+        if ascending {
+            contactList = sorted(contactList, { $0.person.name < $1.person.name })
+        } else { //change the list to be in descending order
+            contactList = sorted(contactList, { $0.person.name > $1.person.name })
+        }
+        
     }
     
 }
