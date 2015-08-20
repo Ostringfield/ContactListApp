@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E33D95B1B28413D00364121 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578771B1F35CB0075B20E /* DataModel.swift */; };
 		0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578541B1F1C420075B20E /* AppDelegate.swift */; };
 		0E8578571B1F1C420075B20E /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578561B1F1C420075B20E /* ContactListViewController.swift */; };
 		0E85785A1B1F1C420075B20E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E8578581B1F1C420075B20E /* Main.storyboard */; };
@@ -169,7 +168,6 @@
 		0E8578471B1F1C420075B20E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Ollie Stringfield";
 				TargetAttributes = {
@@ -240,7 +238,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E85786B1B1F1C420075B20E /* ContactListTests.swift in Sources */,
-				0E33D95B1B28413D00364121 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
