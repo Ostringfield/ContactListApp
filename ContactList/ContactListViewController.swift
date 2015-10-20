@@ -97,6 +97,7 @@ class ContactListViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.stopLoadingAnimation()
                     self.tableView.reloadData()
+                    session.finishTasksAndInvalidate()
                     self.showNetworkError()
                 }
             //cast the response to a NSHTTPResponse so we can use 
@@ -128,7 +129,11 @@ class ContactListViewController: UITableViewController {
         //create an Alert controller which displays a Network error message
         let alert = UIAlertController(title: "Network Error", message: errorMessage, preferredStyle: .Alert)
         //create an Alert action
-        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        let action = UIAlertAction(title: "Retry", style: .Default) {
+            UIAlertAction in
+            NSLog("Retry Pressed")
+            self.getDataFromServer()
+        }
         alert.addAction(action)
         //present the Alert controller
         presentViewController(alert, animated: true, completion: nil)
