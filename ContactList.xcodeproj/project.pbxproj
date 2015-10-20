@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E5966391BD5E5FE00278A3D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5966381BD5E5FE00278A3D /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578541B1F1C420075B20E /* AppDelegate.swift */; };
 		0E8578571B1F1C420075B20E /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578561B1F1C420075B20E /* ContactListViewController.swift */; };
 		0E85785A1B1F1C420075B20E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E8578581B1F1C420075B20E /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		0E85786B1B1F1C420075B20E /* ContactListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85786A1B1F1C420075B20E /* ContactListTests.swift */; };
 		0E8578751B1F1D140075B20E /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578741B1F1D140075B20E /* Contact.swift */; };
 		0E8578781B1F35CB0075B20E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578771B1F35CB0075B20E /* DataModel.swift */; };
-		0E8578801B2044B80075B20E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E85787F1B2044B80075B20E /* SwiftyJSON.swift */; };
 		0E8578841B2199AB0075B20E /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8578831B2199AB0075B20E /* ContactInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E5966381BD5E5FE00278A3D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		0E85784F1B1F1C420075B20E /* ContactList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8578531B1F1C420075B20E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E8578541B1F1C420075B20E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		0E85786A1B1F1C420075B20E /* ContactListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTests.swift; sourceTree = "<group>"; };
 		0E8578741B1F1D140075B20E /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0E8578771B1F35CB0075B20E /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		0E85787F1B2044B80075B20E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		0E8578831B2199AB0075B20E /* ContactInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +91,7 @@
 				0E8578831B2199AB0075B20E /* ContactInfoViewController.swift */,
 				0E85785B1B1F1C420075B20E /* Images.xcassets */,
 				0E85785D1B1F1C420075B20E /* LaunchScreen.xib */,
-				0E85787F1B2044B80075B20E /* SwiftyJSON.swift */,
+				0E5966381BD5E5FE00278A3D /* SwiftyJSON.swift */,
 				0E8578521B1F1C420075B20E /* Supporting Files */,
 				0E8578741B1F1D140075B20E /* Contact.swift */,
 				0E8578771B1F35CB0075B20E /* DataModel.swift */,
@@ -168,6 +168,7 @@
 		0E8578471B1F1C420075B20E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Ollie Stringfield";
 				TargetAttributes = {
@@ -227,7 +228,7 @@
 				0E8578751B1F1D140075B20E /* Contact.swift in Sources */,
 				0E8578781B1F35CB0075B20E /* DataModel.swift in Sources */,
 				0E8578571B1F1C420075B20E /* ContactListViewController.swift in Sources */,
-				0E8578801B2044B80075B20E /* SwiftyJSON.swift in Sources */,
+				0E5966391BD5E5FE00278A3D /* SwiftyJSON.swift in Sources */,
 				0E8578551B1F1C420075B20E /* AppDelegate.swift in Sources */,
 				0E8578841B2199AB0075B20E /* ContactInfoViewController.swift in Sources */,
 			);

@@ -23,6 +23,7 @@ class Contact: NSObject {
     company structures with the relevant data as parameters.
     */
     init(id: Int, name: String, username: String, email: String, phone: String, website: String, street: String, suite: String, city: String, zipcode: String, lat: Double, lng: Double, companyName: String, catchPhrase: String, bs: String) {
+        
         person = Person(id: id, name: name, username: username, email: email, phone: phone, website: website)
         address = Address(street: street, suite: suite, city: city, zipcode: zipcode)
         geo = Geo(lat: lat, lng: lng)

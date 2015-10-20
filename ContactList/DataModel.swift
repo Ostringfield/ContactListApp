@@ -55,9 +55,9 @@ class DataModel  {
         ascending = !ascending //Set the sort to do next (button push)
         //change the list to be in ascending order
         if ascending {
-            contactList = sorted(contactList, { $0.person.name < $1.person.name })
+            contactList = contactList.sort { $0.person.name.compare($1.person.name) == .OrderedAscending }
         } else { //change the list to be in descending order
-            contactList = sorted(contactList, { $0.person.name > $1.person.name })
+            contactList = contactList.sort { $0.person.name.compare($1.person.name) == .OrderedDescending }
         }
         
     }

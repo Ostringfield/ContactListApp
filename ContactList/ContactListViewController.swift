@@ -42,7 +42,7 @@ class ContactListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getDataFromServer()
-        println(dataModel.contactList)
+        print(dataModel.contactList)
     }
     
     /**
@@ -103,7 +103,7 @@ class ContactListViewController: UITableViewController {
             //its statusCode property
             } else if let httpResponse = response as? NSHTTPURLResponse {
                 if httpResponse.statusCode == 200 { //successful response
-                    self.dataModel.setContactData(data) //set the data
+                    self.dataModel.setContactData(data!) //set the data
                     dispatch_async(dispatch_get_main_queue()) { //stop the UI
                         self.stopLoadingAnimation()
                         self.dataModel.sortContacts()
@@ -156,7 +156,7 @@ class ContactListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         //A new or recycled prototype cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("Contact") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Contact") as UITableViewCell!
         
         //get the contact and set the cell text
         let contact = dataModel.contactList[indexPath.row]
